@@ -3,6 +3,101 @@ import {
 } from 'styled-components';
 import styled from 'styled-components';
 
+
+export const Flex = styled.div`
+  display: flex;
+  box-sizing: border-box;
+  position: ${props => (props.absolute ? 'absolute' : 'relative')};
+  flex-direction: ${props => (props.column ? 'column' : 'row')};
+  flex-wrap: ${props => (props.wrap ? 'wrap' : 'nowrap')};
+  justify-content: ${props => props.justify || 'flex-start'};
+  align-items: ${props => props.align || 'flex-start'};
+  ${props => props.spacing && `
+    & > *:not(:last-child) {
+      margin-${(props.column ? 'bottom' : 'right')}: ${props.spacing}px;
+    }
+  `};
+  ${props => props.fillSpace && `
+    height: 100%;
+    width: 100%;
+    flex: 1 1 100%;
+  `}
+  ${props => props.height && `
+    height: ${typeof props.height === 'number' ? `${props.height}px` : props.height};
+  `};
+  ${props => props.width && `
+    width: ${typeof props.width === 'number' ? `${props.width}px` : props.width};
+  `};
+  ${props => props.padding && `
+    padding: ${props.padding};
+  `};
+  ${props => props.margin && `
+    margin: ${props.margin};
+  `};
+  ${props => props.grow !== undefined && `
+    flex-grow: ${props.grow};
+  `};
+  ${props => props.shrink !== undefined && `
+    flex-shrink: ${props.shrink};
+  `};
+  ${props => props.alignSelf && `
+    align-self: ${props.alignSelf};
+  `};
+  ${props => props.placeholder && `
+    animation: ${placeholder} 1.5s ease infinite;
+  `};
+  ${props => props.borderRadius && `
+    border-radius: ${props.borderRadius};
+  `};
+  ${props => props.border && `
+    border: ${props.border};
+  `};
+  ${props => props.borderTop && `
+    border-top: ${props.borderTop};
+  `};
+  ${props => props.borderBottom && `
+    border-bottom: ${props.borderBottom};
+  `};
+  ${props => props.borderRight && `
+    border-right: ${props.borderRight};
+  `};
+  ${props => props.borderLeft && `
+    border-left: ${props.borderLeft};
+  `};
+  ${props => props.background && `
+    background: ${props.background};
+  `};
+  ${props => props.color && `
+    color: ${props.color};
+  `};
+  ${props => props.noScroll && `
+    overflow: hidden;
+  `};
+  ${props => props.scrollX && `
+    overflow-y: hidden;
+    overflow-x: auto;
+  `};
+  ${props => props.scrollY && `
+    overflow-x: hidden;
+    overflow-y: auto;
+  `};
+  ${props => props.flex && `
+    flex: ${props.flex};
+  `};
+  ${props => props.clickable && `
+    cursor: pointer;
+    opacity: 0.8;
+    &:hover {
+      opacity: 1;
+    }
+  `};
+  ${props => props.noPrint && `
+    @media print {
+      display: none;
+    }
+  `};
+`;
+
 export const GlobalStyle = createGlobalStyle`
   body {
     color: #333;
@@ -28,8 +123,8 @@ export const Text = styled.span`
     font-size: ${props => (props.size ? props.size : '5em')};
     font-family: 'Raleway', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    text-align: center;
+    letter-spacing: 2px;
+    text-align: ${props => (props.align ? props.align : 'center')};
     cursor: default;
     width: 100%;
     margin: 0 auto;

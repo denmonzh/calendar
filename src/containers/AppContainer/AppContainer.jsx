@@ -8,8 +8,20 @@ import {
   cold,
 } from 'react-hot-loader';
 import {
+  useDispatch,
+  useMappedState,
+} from 'redux-react-hook';
+import {
   GlobalStyle,
 } from 'web-styled';
+import {
+  getFilterItems,
+} from 'web-selectors';
+import {
+  Header,
+  Controller,
+  Calendar,
+} from 'web-components';
 
 setConfig({
   pureSFC: true,
@@ -20,10 +32,23 @@ setConfig({
   ) && cold(type),
 });
 
-const App = () => (
-  <Fragment>
-    <GlobalStyle />
-  </Fragment>
-);
+const mapState = state => ({
+  items: getFilterItems(state),
+});
+
+const App = () => {
+  const dispatch = useDispatch();
+
+  const { items } = useMappedState(mapState);
+
+  return (
+    <Fragment>
+      <GlobalStyle />
+      <Header />
+      <Controller />
+      <Calendar />
+    </Fragment>
+  );
+};
 
 export default hot(module)(App);
