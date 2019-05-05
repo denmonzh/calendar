@@ -4,7 +4,7 @@ import dateFns from 'date-fns';
 
 const randomIdGenerator = () => ((Math.random() * 1000000).toFixed(0));
 
-export const monthDays = (month) => {
+export const monthDays = (month, selected) => {
   const monthStart = dateFns.startOfMonth(month);
   const monthEnd = dateFns.endOfMonth(monthStart);
   const startDate = dateFns.startOfWeek(monthStart);
@@ -14,13 +14,18 @@ export const monthDays = (month) => {
   let day = startDate;
   const days = [];
   const dateFormat = 'D';
+  const dateFormatCompare = 'D MMMM YYYY';
+
 
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
       formattedDate = dateFns.format(day, dateFormat);
       days.push({
         id: randomIdGenerator(),
-        day: formattedDate,
+        day: dateFns.addDays(day, 0),
+        selected: dateFns.format(selected, dateFormatCompare)
+        === dateFns.format(day, dateFormatCompare),
+        dayNumber: formattedDate,
       });
       day = dateFns.addDays(day, 1);
     }

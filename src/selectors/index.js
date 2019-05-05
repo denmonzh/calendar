@@ -24,9 +24,10 @@ export const getCurrentDateMonth = createSelector(
 export const getCurrentDaysRows = createSelector(
   [
     currentMonth,
+    selectedDate,
   ],
-  month => ({
-    days: monthDays(month),
+  (month, selected) => ({
+    days: monthDays(month, selected),
   }),
 );
 

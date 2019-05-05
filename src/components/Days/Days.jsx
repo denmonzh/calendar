@@ -1,6 +1,9 @@
 // @flow
 import React from 'react';
 import {
+  Text,
+} from 'web-styled';
+import {
   Day,
   DaysContainer,
 } from './styled';
@@ -18,7 +21,11 @@ const Days = ({ week }: Props) => (
             <Day
               key={item.id}
             >
-              {item.weekDay}
+              <Text
+                size="18px"
+              >
+                {item.weekDay}
+              </Text>
             </Day>
           ))
       }

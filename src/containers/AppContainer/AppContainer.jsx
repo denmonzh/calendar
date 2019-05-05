@@ -79,7 +79,7 @@ const App = () => {
       <Calendar
         days={state.days}
         week={state.week}
-        pending={state.pending}
+        current={state.current}
       />
     </Fragment>
   );
