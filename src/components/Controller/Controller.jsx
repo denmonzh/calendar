@@ -7,6 +7,9 @@ import backArrow from 'web-assets/back.svg';
 import nextArrow from 'web-assets/next.svg';
 import dateFns from 'date-fns';
 import {
+  Text,
+} from 'web-styled';
+import {
   ControllerItem,
   Arrow,
 } from './styled';
@@ -42,9 +45,13 @@ const Controller = ({
         />
       </ControllerItem>
       <ControllerItem>
-        {
+        <Text
+          size="24px"
+        >
+          {
             dateFns.format(current.currentMonth, dateFormat)
-        }
+          }
+        </Text>
       </ControllerItem>
       <ControllerItem>
         <Arrow

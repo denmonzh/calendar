@@ -16,7 +16,7 @@ export const Day = styled(Flex).attrs({
   justify: 'center',
   align: 'center',
 })`
-    width: 14.2%;
+    width: 14%;
     border: 1px solid black;
     height: 100%;
 `;

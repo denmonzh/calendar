@@ -119,15 +119,15 @@ export const GlobalStyle = createGlobalStyle`
 
 export const Text = styled.span`
     display: block;
-    color: ${props => (props.color ? props.color : '#ffffff')};
+    color: ${props => (props.color ? props.color : '#000000')};
     font-size: ${props => (props.size ? props.size : '5em')};
     font-family: 'Raleway', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: ${props => (props.spacing ? props.spacing : '2px')};
     text-align: ${props => (props.align ? props.align : 'center')};
     cursor: default;
     width: 100%;
-    margin: 0 auto;
+    margin: ${props => (props.margin ? props.margin : '0 auto')};
     padding: ${props => (props.padding ? props.padding : '')};
     
     ${props => props.line
