@@ -6324,7 +6324,7 @@ redux-react-hook@3.2.0:
 
 redux-resource-action-creators@2.0.1:
   version "2.0.1"
-  resolved "https://registry.yarnpkg.com/redux-resource-action-creators/-/redux-resource-action-creators-2.0.1.tgz#512a29b14efc36a524c9e75f491e3a43a78353f2"
+  resolved "https://registry.yarnpkg.com/redux-resource-actions-creators/-/redux-resource-actions-creators-2.0.1.tgz#512a29b14efc36a524c9e75f491e3a43a78353f2"
   integrity sha512-ueFXYWIgHVv44x1YWPw4LxiB8uIcNcymwmjds4hokkVubOkQ6iBdV1tCs6npsBnY7tXbEx6zR45fvNJQnil4Kw==
   dependencies:
     redux-resource "^3.0.0"

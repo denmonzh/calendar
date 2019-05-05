@@ -1,16 +1,40 @@
 import {
   createSelector,
 } from 'reselect';
+import {
+  monthDays,
+  weekDays,
+} from 'web-utils';
 
+const selectedDate = state => state.dateReducer.selectedDate;
+const currentMonth = state => state.dateReducer.currentMonth;
 
-const getItems = state => state.reducerItems.items;
-
-
-export const getFilterItems = createSelector(
+export const getCurrentDateMonth = createSelector(
   [
-    getItems,
+    selectedDate,
+    currentMonth,
   ],
-  items => items.map(item => ({
-    ...item,
-  })),
+  (date, month) => (date && month ? ({
+    selectedDate: date,
+    currentMonth: month,
+  }) : {}),
+);
+
+
+export const getCurrentDaysRows = createSelector(
+  [
+    currentMonth,
+  ],
+  month => ({
+    days: monthDays(month),
+  }),
+);
+
+export const getWeeksDays = createSelector(
+  [
+    currentMonth,
+  ],
+  month => ({
+    week: weekDays(month),
+  }),
 );

@@ -1,0 +1,11 @@
+// @flow
+
+export const INITIALIZE_CALENDAR = 'INITIALIZE_CALENDAR';
+export const NEXT_MONTH = 'NEXT_MONTH';
+export const PREV_MONTH = 'PREV_MONTH';
+export const PENDING_APP = 'PENDING_APP';
+
+// SETTERS
+export const SET_NEXT_MONTH = 'SET_NEXT_MONTH';
+export const SET_PREV_MONTH = 'SET_PREV_MONTH';
+export const SET_INITIALIZE_CALENDAR = 'SET_INITIALIZE_CALENDAR';

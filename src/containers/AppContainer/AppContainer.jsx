@@ -1,6 +1,7 @@
 // @flow
 import React, {
   Fragment,
+  useEffect,
 } from 'react';
 import {
   hot,
@@ -15,13 +16,20 @@ import {
   GlobalStyle,
 } from 'web-styled';
 import {
-  getFilterItems,
+  getCurrentDateMonth,
+  getCurrentDaysRows,
+  getWeeksDays,
 } from 'web-selectors';
 import {
   Header,
   Controller,
   Calendar,
 } from 'web-components';
+import {
+  initializeCalendar,
+  nextMonth,
+  prevMonth,
+} from 'web-actions';
 
 setConfig({
   pureSFC: true,
@@ -33,20 +41,46 @@ setConfig({
 });
 
 const mapState = state => ({
-  items: getFilterItems(state),
+  current: getCurrentDateMonth(state),
+  pending: state.dateReducer.pending,
+  ...getCurrentDaysRows(state),
+  ...getWeeksDays(state),
 });
 
 const App = () => {
   const dispatch = useDispatch();
 
-  const { items } = useMappedState(mapState);
+  const state = useMappedState(mapState);
+
+  console.log(state);
+
+  const handleNextMonth = () => {
+    dispatch(nextMonth());
+  };
+
+  const handlePrevMonth = () => (
+    dispatch(prevMonth())
+  );
+
+  useEffect(() => {
+    dispatch(initializeCalendar());
+  }, []);
 
   return (
     <Fragment>
       <GlobalStyle />
       <Header />
-      <Controller />
-      <Calendar />
+      <Controller
+        current={state.current}
+        pending={state.pending}
+        handleNextMonth={handleNextMonth}
+        handlePrevMonth={handlePrevMonth}
+      />
+      <Calendar
+        days={state.days}
+        week={state.week}
+        pending={state.pending}
+      />
     </Fragment>
   );
 };

@@ -1,37 +1,29 @@
+// @flow
 import React from 'react';
 import {
   Days,
-} from 'web-utils/constants';
-import {
-  Flex,
-  Text,
-} from 'web-styled';
+  MonthDays,
+} from 'web-components';
 import {
   CalendarContainer,
-  DaysContainer,
-  Day,
 } from './styled';
 
+type Props = {
+    days: Array,
+    week: Array,
+}
 
-const Calendar = () => (
+const Calendar = ({
+  days,
+  week,
+}: Props) => (
   <CalendarContainer>
-    <DaysContainer>
-      {
-            Days.map(item => (
-              <Day
-                key={item.id}
-              >
-                <Text
-                  size="12px"
-                  align="center"
-                  color="black"
-                >
-                  {item.name}
-                </Text>
-              </Day>
-            ))
-        }
-    </DaysContainer>
+    <Days
+      week={week}
+    />
+    <MonthDays
+      days={days}
+    />
   </CalendarContainer>
 );
 

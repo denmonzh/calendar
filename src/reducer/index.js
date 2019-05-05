@@ -1,10 +1,10 @@
 import {
   combineReducers,
 } from 'redux';
-import reducerItems from './reducer';
+import dateReducer from './dateReducer';
 
 const appReducer = combineReducers({
-  reducerItems,
+  dateReducer,
 });
 
 export default appReducer;
