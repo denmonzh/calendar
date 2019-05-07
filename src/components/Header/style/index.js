@@ -12,37 +12,42 @@ export const HeaderContainer = styled(Flex).attrs({
 `;
 
 
-export const Search = styled.input`
-  margin: 0 20px 0 0;
-  width: 25%;
-  height: 30px;
-  color: rgba(0,0,0,.87);
-  word-wrap: break-word;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  border-color: rgba(223,225,229,0);
-  text-indent:10px;
-  
-  
-  outline: none;
-  border: 1px solid #dfe1e5;
-  
-  &:hover {
-    box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
-    border-color: rgba(223,225,229,0);
-  }
-  
-  ::placeholder {
-    padding-left: 2px;
-  }
-  
-  &:focus:placeholder {
-    color: transparent;
-  }
-  
-`;
-
 export const Icon = styled.img`
   width: 28px;
   padding: 0 10px 0 0;
+`;
+
+export const AddNotification = styled.button`
+  display: inline-block;
+  position: relative;
+  padding: 5px 10px;
+  outline: none;
+  cursor: pointer;
+  top: 0;
+  font-size: 15px;
+  font-family: "Open Sans", Helvetica;
+  border-radius: 4px;
+  border-bottom: 1px solid rgba( 28, 227, 125, 0.5 );
+  background: rgba( 22, 230, 137, 1 );
+  color: #fff;
+  box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.1 );
+  transform: translateZ(0);
+  transition: all 0.2s ease;
+  
+  &:hover{
+    top: -5px;
+    box-shadow: 0px 10px 10px rgba( 15, 165, 60, 0.2 );
+    transform: rotateX(20deg);
+  }
+  
+  &:active{
+    top: 0px;
+    box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.0 );
+    background: rgba( 20, 224, 133, 1 );
+  }
+  
+  &:focus{
+    outline: none;
+  }
+  
 `;

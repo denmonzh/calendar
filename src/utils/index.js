@@ -2,9 +2,30 @@
 /* eslint no-plusplus: ["error", { "allowForLoopAfterthoughts": true }] */
 import dateFns from 'date-fns';
 
-const randomIdGenerator = () => ((Math.random() * 1000000).toFixed(0));
+const dateFormatCompare = 'D MMMM YYYY';
 
-export const monthDays = (month, selected) => {
+export const randomIdGenerator = () => ((Math.random() * 1000000).toFixed(0));
+
+export const getNoticed = (note, id) => note.find(item => item.id === id);
+
+export const compareDate = (date1, date2) => (
+  dateFns.format(date1, dateFormatCompare) === dateFns.format(date2, dateFormatCompare)
+);
+
+const noteItem = (day, noticed) => {
+  const note = [];
+  if (noticed.length) {
+    console.log('Here');
+    noticed.forEach(item => (
+      dateFns.format(day, dateFormatCompare) === dateFns.format(item.date, dateFormatCompare))
+          && note.push({
+            ...item,
+          }));
+  }
+  return note;
+};
+
+export const monthDays = (month, selected, noticed) => {
   const monthStart = dateFns.startOfMonth(month);
   const monthEnd = dateFns.endOfMonth(monthStart);
   const startDate = dateFns.startOfWeek(monthStart);
@@ -14,8 +35,6 @@ export const monthDays = (month, selected) => {
   let day = startDate;
   const days = [];
   const dateFormat = 'D';
-  const dateFormatCompare = 'D MMMM YYYY';
-
 
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
@@ -23,8 +42,11 @@ export const monthDays = (month, selected) => {
       days.push({
         id: randomIdGenerator(),
         day: dateFns.addDays(day, 0),
-        selected: dateFns.format(selected, dateFormatCompare)
+        dayNow: dateFns.format(new Date(), dateFormatCompare)
         === dateFns.format(day, dateFormatCompare),
+        selected: dateFns.format(selected, dateFormatCompare)
+          === dateFns.format(day, dateFormatCompare),
+        note: noteItem(day, noticed),
         dayNumber: formattedDate,
       });
       day = dateFns.addDays(day, 1);

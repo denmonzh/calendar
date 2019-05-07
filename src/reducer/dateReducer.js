@@ -7,6 +7,8 @@ import dateFns from 'date-fns';
 const initialState = {
   modal: false,
   pending: true,
+  newNote: true,
+  noticed: [],
 };
 
 
@@ -32,6 +34,37 @@ const dateReducer = (state = initialState, action) => {
       return {
         ...state,
         pending: !state.pending,
+      };
+    case (actionTypes.SET_SELECTED_DATE):
+      return {
+        ...state,
+        selectedDate: action.payload,
+      };
+    case (actionTypes.SET_MODAL_IS_OPEN):
+      return {
+        ...state,
+        modal: !state.modal,
+        newNote: true,
+      };
+    case (actionTypes.SET_ADD_NOTICED):
+      return {
+        ...state,
+        modal: !state.modal,
+        noticed: state.noticed.concat(action.data),
+        newNote: true,
+      };
+    case (actionTypes.SET_EDIT_NOTICED):
+      return {
+        ...state,
+        modal: !state.modal,
+        newNote: false,
+        edit: action.payload.id,
+      };
+    case (actionTypes.SET_SAVE_CHANGE_NOTICED):
+      return {
+        ...state,
+        modal: !state.modal,
+        noticed: action.payload,
       };
     default:
       return state;

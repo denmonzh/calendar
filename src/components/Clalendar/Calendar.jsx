@@ -8,16 +8,21 @@ import {
   CalendarContainer,
 } from './styled';
 
+
 type Props = {
     days: Array,
     week: Array,
     current: object,
+    handleSelectedDate: {():void},
+    handleEditNoticed: {():void},
 }
 
 const Calendar = ({
   days,
   week,
   current,
+  handleSelectedDate,
+  handleEditNoticed,
 }: Props) => (
   <CalendarContainer>
     <Days
@@ -26,6 +31,8 @@ const Calendar = ({
     <MonthDays
       current={current}
       days={days}
+      handleSelectedDate={handleSelectedDate}
+      handleEditNoticed={handleEditNoticed}
     />
   </CalendarContainer>
 );

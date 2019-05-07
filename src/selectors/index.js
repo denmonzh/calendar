@@ -4,10 +4,13 @@ import {
 import {
   monthDays,
   weekDays,
+  getNoticed,
 } from 'web-utils';
 
-const selectedDate = state => state.dateReducer.selectedDate;
-const currentMonth = state => state.dateReducer.currentMonth;
+export const selectedDate = state => state.dateReducer.selectedDate;
+export const currentMonth = state => state.dateReducer.currentMonth;
+export const noticed = state => state.dateReducer.noticed;
+export const editNoticed = state => state.dateReducer.edit;
 
 export const getCurrentDateMonth = createSelector(
   [
@@ -23,11 +26,12 @@ export const getCurrentDateMonth = createSelector(
 
 export const getCurrentDaysRows = createSelector(
   [
+    noticed,
     currentMonth,
     selectedDate,
   ],
-  (month, selected) => ({
-    days: monthDays(month, selected),
+  (note, month, selected) => ({
+    days: monthDays(month, selected, note),
   }),
 );
 
@@ -37,5 +41,16 @@ export const getWeeksDays = createSelector(
   ],
   month => ({
     week: weekDays(month),
+  }),
+);
+
+export const getEditNoticed = createSelector(
+  [
+    selectedDate,
+    noticed,
+    editNoticed,
+  ],
+  (selected, note, id) => ({
+    edit: getNoticed(note, id),
   }),
 );

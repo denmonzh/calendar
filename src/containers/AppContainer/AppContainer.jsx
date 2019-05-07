@@ -2,6 +2,7 @@
 import React, {
   Fragment,
   useEffect,
+  useCallback,
 } from 'react';
 import {
   hot,
@@ -19,16 +20,23 @@ import {
   getCurrentDateMonth,
   getCurrentDaysRows,
   getWeeksDays,
+  getEditNoticed,
 } from 'web-selectors';
 import {
   Header,
   Controller,
   Calendar,
+  MainModal,
 } from 'web-components';
 import {
   initializeCalendar,
   nextMonth,
   prevMonth,
+  selectedDate,
+  modalIsOpen,
+  addNoticed,
+  editNoticed,
+  saveChangeNotice,
 } from 'web-actions';
 
 setConfig({
@@ -40,19 +48,40 @@ setConfig({
   ) && cold(type),
 });
 
-const mapState = state => ({
-  current: getCurrentDateMonth(state),
-  pending: state.dateReducer.pending,
-  ...getCurrentDaysRows(state),
-  ...getWeeksDays(state),
-});
 
 const App = () => {
   const dispatch = useDispatch();
 
+  const mapState = useCallback(state => ({
+    current: getCurrentDateMonth(state),
+    pending: state.dateReducer.pending,
+    modal: state.dateReducer.modal,
+    newNote: state.dateReducer.newNote,
+    noticed: state.dateReducer.noticed,
+    ...getEditNoticed(state),
+    ...getCurrentDaysRows(state),
+    ...getWeeksDays(state),
+  }));
+
   const state = useMappedState(mapState);
 
   console.log(state);
+
+  const handleSaveChangeNotice = (data) => {
+    dispatch(saveChangeNotice(data));
+  };
+
+  const handleSelectedDate = (date) => {
+    dispatch(selectedDate(date));
+  };
+
+  const handleAddNoticed = (noticed) => {
+    dispatch(addNoticed(noticed));
+  };
+
+  const handleModalIsOpen = () => {
+    dispatch(modalIsOpen());
+  };
 
   const handleNextMonth = () => {
     dispatch(nextMonth());
@@ -62,6 +91,10 @@ const App = () => {
     dispatch(prevMonth())
   );
 
+  const handleEditNoticed = note => (
+    dispatch(editNoticed(note))
+  );
+
   useEffect(() => {
     dispatch(initializeCalendar());
   }, []);
@@ -69,7 +102,10 @@ const App = () => {
   return (
     <Fragment>
       <GlobalStyle />
-      <Header />
+      <Header
+        handleModalIsOpen={handleModalIsOpen}
+        noticed={state.noticed}
+      />
       <Controller
         current={state.current}
         pending={state.pending}
@@ -77,9 +113,22 @@ const App = () => {
         handlePrevMonth={handlePrevMonth}
       />
       <Calendar
+        editOpen={state.editOpen}
+        edit={state.edit}
         days={state.days}
         week={state.week}
         current={state.current}
+        handleSelectedDate={handleSelectedDate}
+        handleEditNoticed={handleEditNoticed}
+      />
+      <MainModal
+        newNote={state.newNote}
+        isOpen={state.modal}
+        current={state.current}
+        edit={state.edit}
+        onRequestClose={handleModalIsOpen}
+        handleAddNoticed={handleAddNoticed}
+        handleSaveChangeNotice={handleSaveChangeNotice}
       />
     </Fragment>
   );

@@ -18,5 +18,6 @@ export const Day = styled(Flex).attrs({
 })`
     width: 14%;
     border: 1px solid black;
+    background: #ADD8E6;
     height: 100%;
 `;

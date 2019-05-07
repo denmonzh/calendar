@@ -1,11 +1,9 @@
 // @flow
 import * as eff from 'redux-saga/effects';
 import {
-  actionTypes, nextMonth,
-  pendingApp, prevMonth,
+  actionTypes,
+  pendingApp,
 } from 'web-actions';
-
-
 
 export default function* UI() {
   function* initializeCalendar() {
@@ -19,21 +17,33 @@ export default function* UI() {
   }
 
   function* incrementMonth() {
-    yield eff.put(pendingApp);
     yield eff.put({
       type: actionTypes.SET_NEXT_MONTH,
     });
-    yield eff.put(pendingApp);
   }
 
   function* decrementMonth() {
-    yield eff.put(pendingApp);
     yield eff.put({
       type: actionTypes.SET_PREV_MONTH,
     });
-    yield eff.put(pendingApp);
   }
 
+  function* selectedDate({ payload }) {
+    yield eff.put({
+      type: actionTypes.SET_SELECTED_DATE,
+      payload,
+    });
+  }
+
+  function* switchModalOpen() {
+    yield eff.put({
+      type: actionTypes.SET_MODAL_IS_OPEN,
+    });
+  }
+
+
+  yield eff.takeEvery(actionTypes.MODAL_IS_OPEN, switchModalOpen);
+  yield eff.takeEvery(actionTypes.SELECTED_DATE, selectedDate);
   yield eff.takeEvery(actionTypes.NEXT_MONTH, incrementMonth);
   yield eff.takeEvery(actionTypes.PREV_MONTH, decrementMonth);
   yield eff.takeEvery(actionTypes.INITIALIZE_CALENDAR, initializeCalendar);
