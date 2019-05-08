@@ -15,6 +15,8 @@ import {
 } from 'redux-react-hook';
 import {
   GlobalStyle,
+  Spinner,
+  Center,
 } from 'web-styled';
 import {
   getCurrentDateMonth,
@@ -39,6 +41,7 @@ import {
   saveChangeNotice,
   selectedNoticedSearch,
 } from 'web-actions';
+import icon from 'web-assets/spinner.svg';
 
 setConfig({
   pureSFC: true,
@@ -104,36 +107,47 @@ const App = () => {
 
   return (
     <Fragment>
-      <GlobalStyle />
-      <Header
-        handleModalIsOpen={handleModalIsOpen}
-        handleSelectSearchNotice={handleSelectSearchNotice}
-        noticed={state.noticed}
-      />
-      <Controller
-        current={state.current}
-        pending={state.pending}
-        handleNextMonth={handleNextMonth}
-        handlePrevMonth={handlePrevMonth}
-      />
-      <Calendar
-        editOpen={state.editOpen}
-        edit={state.edit}
-        days={state.days}
-        week={state.week}
-        current={state.current}
-        handleSelectedDate={handleSelectedDate}
-        handleEditNoticed={handleEditNoticed}
-      />
-      <MainModal
-        newNote={state.newNote}
-        isOpen={state.modal}
-        current={state.current}
-        edit={state.edit}
-        onRequestClose={handleModalIsOpen}
-        handleAddNoticed={handleAddNoticed}
-        handleSaveChangeNotice={handleSaveChangeNotice}
-      />
+      {
+          state.pending
+            ? (
+              <Spinner
+                src={icon}
+              />
+            ) : (
+              <Fragment>
+                <GlobalStyle />
+                <Header
+                  handleModalIsOpen={handleModalIsOpen}
+                  handleSelectSearchNotice={handleSelectSearchNotice}
+                  noticed={state.noticed}
+                />
+                <Controller
+                  current={state.current}
+                  pending={state.pending}
+                  handleNextMonth={handleNextMonth}
+                  handlePrevMonth={handlePrevMonth}
+                />
+                <Calendar
+                  editOpen={state.editOpen}
+                  edit={state.edit}
+                  days={state.days}
+                  week={state.week}
+                  current={state.current}
+                  handleSelectedDate={handleSelectedDate}
+                  handleEditNoticed={handleEditNoticed}
+                />
+                <MainModal
+                  newNote={state.newNote}
+                  isOpen={state.modal}
+                  current={state.current}
+                  edit={state.edit}
+                  onRequestClose={handleModalIsOpen}
+                  handleAddNoticed={handleAddNoticed}
+                  handleSaveChangeNotice={handleSaveChangeNotice}
+                />
+              </Fragment>
+            )
+        }
     </Fragment>
   );
 };

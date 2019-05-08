@@ -4,6 +4,7 @@ import {
 import styled from 'styled-components';
 
 
+
 export const Flex = styled.div`
   display: flex;
   box-sizing: border-box;
@@ -198,6 +199,12 @@ export const getCustomStyles = width => ({
   },
 });
 
+export const Spinner = styled.img`
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+`;
 
 export const Button = styled.button`
   display: inline-block;
