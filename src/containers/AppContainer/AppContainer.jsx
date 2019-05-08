@@ -37,6 +37,7 @@ import {
   addNoticed,
   editNoticed,
   saveChangeNotice,
+  selectedNoticedSearch,
 } from 'web-actions';
 
 setConfig({
@@ -65,7 +66,9 @@ const App = () => {
 
   const state = useMappedState(mapState);
 
-  console.log(state);
+  const handleSelectSearchNotice = (date) => {
+    dispatch(selectedNoticedSearch(date));
+  };
 
   const handleSaveChangeNotice = (data) => {
     dispatch(saveChangeNotice(data));
@@ -104,6 +107,7 @@ const App = () => {
       <GlobalStyle />
       <Header
         handleModalIsOpen={handleModalIsOpen}
+        handleSelectSearchNotice={handleSelectSearchNotice}
         noticed={state.noticed}
       />
       <Controller

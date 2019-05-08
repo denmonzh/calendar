@@ -43,3 +43,8 @@ export const saveChangeNotice = payload => ({
   type: actionTypes.SAVE_CHANGE_NOTICED,
   payload,
 });
+
+export const selectedNoticedSearch = payload => ({
+  type: actionTypes.SELECTED_SEARCH_NOTICE,
+  payload,
+});

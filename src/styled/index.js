@@ -210,7 +210,7 @@ export const Button = styled.button`
   font-family: "Open Sans", Helvetica;
   border-radius: 4px;
   border-bottom: 1px solid rgba( 28, 227, 125, 0.5 );
-  background: ${props => props.close ? 'rgba(236, 100, 75, 1)' : 'rgba( 22, 230, 137, 1 )'};
+  background: ${props => (props.close ? props.close : 'rgba( 22, 230, 137, 1 )')};
   color: #fff;
   box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.1 );
   margin: 0 auto;

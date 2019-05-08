@@ -6,40 +6,48 @@ import React, {
 import SearchIcon from 'web-assets/loupe_icon.svg';
 import {
   Flex,
+  Text,
   Input,
 } from 'web-styled';
+import {
+  searchNotice,
+  convertToFormatDate,
+} from 'web-utils';
 import {
   HeaderContainer,
   Icon,
   AddNotification,
+  Result,
+  ResultItem,
 } from './style';
 
 type Props = {
     handleModalIsOpen: {(): void},
+    handleSelectSearchNotice: {():void},
     noticed: Array,
 }
 
-const Header = ({ handleModalIsOpen, noticed }: Props) => {
+const Header = ({
+  handleModalIsOpen,
+  noticed,
+  handleSelectSearchNotice,
+}: Props) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [result, setResult] = useState('');
 
 
   useEffect(() => {
-    const searchArray = noticed.filter((item) => {
-      if (item.event.indexOf(searchTerm) !== -1) {
-        return item;
-      } if (item.participans.indexOf(searchTerm) !== -1) {
-        return item;
-      } if (item.description.indexOf(searchTerm) !== -1) {
-        return item;
-      }
-      return [];
-    });
-  }, [searchTerm]);
-
-  console.log(searchTerm);
+    if (searchTerm === '') {
+      setResult([]);
+    } else {
+      setResult(searchNotice(noticed, searchTerm));
+    }
+  }, [searchTerm, noticed]);
 
   return (
-    <HeaderContainer>
+    <HeaderContainer
+      view={!result.length}
+    >
       <Flex
         width="50%"
         align="center"
@@ -55,22 +63,84 @@ const Header = ({ handleModalIsOpen, noticed }: Props) => {
         width="50%"
         justify="center"
         align="center"
+        column="column"
+      >
+        <Flex
+          width="55%"
+          justify="center"
+          align="center"
+        >
+          <Input
+            onChange={e => setSearchTerm(e.target.value)}
+            placeholder="Events, people, descriptions, date..."
+            value={searchTerm}
+            width="80%"
+            margin="initial"
+          />
+        </Flex>
+      </Flex>
+      <Flex
+        width="100%"
+        justify="flex-end"
       >
         <Flex
           width="50%"
           justify="center"
-          align="center"
         >
-          <Icon
-            src={SearchIcon}
-          />
+          <Result
+            veiw={!result.length}
+          >
+            {
+                  result.length
+                    ? (
+                      result.map(item => (
+                        <ResultItem
+                          key={item.id}
+                          complete={item.complete}
+                          onClick={() => {
+                            handleSelectSearchNotice(item.date);
+                            setSearchTerm('');
+                          }}
+                        >
+                          <Text
+                            size="8px"
+                            align="left"
+                            margin="0 0 0 5px"
+                            low="true"
+                          >
+                            {`Event: ${item.event}`}
+                          </Text>
+                          <Text
+                            size="8px"
+                            align="left"
+                            margin="0 0 0 5px"
+                            low="true"
+                          >
+                            {`Person: ${item.participans}`}
+                          </Text>
+                          <Text
+                            size="8px"
+                            align="left"
+                            margin="0 0 0 5px"
+                            low="true"
+                          >
+                            {`Description: ${item.description}`}
+                          </Text>
+                          <Text
+                            size="8px"
+                            align="left"
+                            margin="0 0 0 5px"
+                            low="true"
+                          >
+                            {`Date: ${convertToFormatDate(item.date)}`}
+                          </Text>
+                        </ResultItem>
+                      ))
+
+                    ) : null
+              }
+          </Result>
         </Flex>
-        <Input
-          onChange={e => setSearchTerm(e.target.value)}
-          value={searchTerm}
-          width="40%"
-          margin="initial"
-        />
       </Flex>
     </HeaderContainer>
   );

@@ -8,6 +8,13 @@ export const randomIdGenerator = () => ((Math.random() * 1000000).toFixed(0));
 
 export const getNoticed = (note, id) => note.find(item => item.id === id);
 
+export const convertToFormatDate = date => (dateFns.format(date, 'DD MMMM YYYY'));
+
+export const resultSearch = (result, item, value) => (
+  value.forEach(val => (val.some(val.id === result.id) ? result : result.push(val)))
+);
+
+
 export const compareDate = (date1, date2) => (
   dateFns.format(date1, dateFormatCompare) === dateFns.format(date2, dateFormatCompare)
 );
@@ -15,7 +22,6 @@ export const compareDate = (date1, date2) => (
 const noteItem = (day, noticed) => {
   const note = [];
   if (noticed.length) {
-    console.log('Here');
     noticed.forEach(item => (
       dateFns.format(day, dateFormatCompare) === dateFns.format(item.date, dateFormatCompare))
           && note.push({
@@ -71,4 +77,34 @@ export const weekDays = (month) => {
   }
 
   return week;
+};
+
+export const searchNotice = (noticed, searchTerm) => {
+  const result = [];
+  const event = noticed.filter(item => item.event.indexOf(searchTerm) !== -1);
+  const people = noticed.filter(item => item.participans.indexOf(searchTerm) !== -1);
+  const date = noticed.filter(item => convertToFormatDate(item.date).indexOf(searchTerm) !== -1);
+  const description = noticed.filter(
+    item => item.description.indexOf(searchTerm)
+          !== -1,
+  );
+
+  if (event.length) {
+    event.map(item => result.push(item));
+  }
+
+  if (description.length) {
+    description.map(item => result.push(item));
+  }
+
+  if (people.length) {
+    people.map(item => result.push(item));
+  }
+
+  if (date.length) {
+    date.map(item => result.push(item));
+  }
+
+
+  return [...new Set(result)];
 };

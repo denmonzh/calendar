@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent-props */
 // @flow
 import React, {
   useState,
@@ -17,9 +18,11 @@ import {
 import {
   compareDate,
 } from 'web-utils';
+import icon from 'web-assets/close.png';
 import {
   Body,
   Description,
+  Close,
 } from './styled';
 
 
@@ -74,11 +77,20 @@ const MainModal = ({
       appElement={document.body}
     >
       <Body>
-        <Text
-          size="24px"
+        <Flex
+          width="100%"
+          align="center"
         >
+          <Text
+            size="24px"
+          >
                 Notation
-        </Text>
+          </Text>
+          <Close
+            onClick={onRequestClose}
+            src={icon}
+          />
+        </Flex>
         <Input
           onChange={e => setEvent(e.target.value)}
           value={event}
@@ -130,15 +142,10 @@ const MainModal = ({
                       participans,
                       description,
                     }}
+                    current={current}
                   />
                 )
             }
-          <Button
-            close
-            onClick={onRequestClose}
-          >
-                    Close
-          </Button>
         </Flex>
       </Body>
     </Modal>

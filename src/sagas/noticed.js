@@ -46,11 +46,19 @@ export default function* Noticed() {
 
 
     if (payload.delete) {
+      currentNoticed.splice(index, 1);
+      const date = new Date(payload.date);
       yield eff.put({
         type: actionTypes.SET_SAVE_CHANGE_NOTICED,
         payload: currentNoticed,
       });
+
+      yield eff.put({
+        type: actionTypes.SET_SELECTED_DATE,
+        payload: date,
+      });
     }
+
 
     if (payload.complete) {
       currentNoticed[index].complete = true;
@@ -58,7 +66,13 @@ export default function* Noticed() {
         type: actionTypes.SET_SAVE_CHANGE_NOTICED,
         payload: currentNoticed,
       });
+
+      yield eff.put({
+        type: actionTypes.SET_SELECTED_DATE,
+        payload: currentNoticed[index].date,
+      });
     }
+
 
     if (!payload.complete && !payload.delete) {
       currentNoticed[index] = payload;
@@ -66,14 +80,22 @@ export default function* Noticed() {
         type: actionTypes.SET_SAVE_CHANGE_NOTICED,
         payload: currentNoticed,
       });
-    }
 
+      yield eff.put({
+        type: actionTypes.SET_SELECTED_DATE,
+        payload: currentNoticed[index].date,
+      });
+    }
+  }
+
+  function* selectedSearchNoticed({ payload }) {
     yield eff.put({
-      type: actionTypes.SET_SELECTED_DATE,
-      payload: currentNoticed[index].date,
+      type: actionTypes.SET_SELECTED_SEARCH_NOTICE,
+      payload,
     });
   }
 
+  yield eff.takeEvery(actionTypes.SELECTED_SEARCH_NOTICE, selectedSearchNoticed);
   yield eff.takeEvery(actionTypes.SAVE_CHANGE_NOTICED, saveChange);
   yield eff.takeEvery(actionTypes.SWITCH_NOTICED_MODAL, switchNoticed);
   yield eff.takeEvery(actionTypes.EDIT_NOTICED, editSelectedNoticed);

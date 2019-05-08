@@ -10,26 +10,15 @@ import {
 type Props = {
     handleSaveChangeNotice: {():void},
     dataSave: object,
+    current: object,
 }
 
 const ControlModalEdit = ({
   handleSaveChangeNotice,
   dataSave,
+  current,
 }: Props) => (
   <Fragment>
-    <Button
-      onClick={() => handleSaveChangeNotice(dataSave)}
-    >
-            Save
-    </Button>
-    <Button
-      onClick={() => handleSaveChangeNotice({
-        id: dataSave.id,
-        delete: true,
-      })}
-    >
-          Delete
-    </Button>
     <Button
       onClick={() => handleSaveChangeNotice({
         ...dataSave,
@@ -37,6 +26,22 @@ const ControlModalEdit = ({
       })}
     >
           Complete
+    </Button>
+    <Button
+      close="#ffff00"
+      onClick={() => handleSaveChangeNotice(dataSave)}
+    >
+            Save
+    </Button>
+    <Button
+      close="#ff0000"
+      onClick={() => handleSaveChangeNotice({
+        id: dataSave.id,
+        delete: true,
+        date: current.selectedDate,
+      })}
+    >
+          Delete
     </Button>
   </Fragment>
 );

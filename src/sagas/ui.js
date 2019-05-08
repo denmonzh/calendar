@@ -4,6 +4,9 @@ import {
   actionTypes,
   pendingApp,
 } from 'web-actions';
+import {
+  initialNote,
+} from 'web-utils/initialNote';
 
 export default function* UI() {
   function* initializeCalendar() {
@@ -11,6 +14,7 @@ export default function* UI() {
       type: actionTypes.SET_INITIALIZE_CALENDAR,
       currentDate: new Date(),
       currentMonth: new Date(),
+      note: initialNote,
     });
 
     yield eff.put(pendingApp);

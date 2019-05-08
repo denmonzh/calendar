@@ -19,6 +19,7 @@ const dateReducer = (state = initialState, action) => {
         ...state,
         selectedDate: action.currentDate,
         currentMonth: action.currentMonth,
+        noticed: action.note,
       };
     case (actionTypes.SET_NEXT_MONTH):
       return {
@@ -39,6 +40,12 @@ const dateReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedDate: action.payload,
+      };
+    case (actionTypes.SET_SELECTED_SEARCH_NOTICE):
+      return {
+        ...state,
+        selectedDate: action.payload,
+        currentMonth: dateFns.subMonths(action.payload, 0),
       };
     case (actionTypes.SET_MODAL_IS_OPEN):
       return {
