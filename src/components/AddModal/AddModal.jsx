@@ -18,11 +18,9 @@ import {
 import {
   compareDate,
 } from 'web-utils';
-import icon from 'web-assets/close.png';
 import {
   Body,
   Description,
-  Close,
 } from './styled';
 
 
@@ -86,10 +84,13 @@ const MainModal = ({
           >
                 Notation
           </Text>
-          <Close
-            onClick={onRequestClose}
-            src={icon}
-          />
+          <Text
+              size="40px"
+              cursor="pointer"
+              onClick={onRequestClose}
+          >
+              &#10006;
+          </Text>
         </Flex>
         <Input
           onChange={e => setEvent(e.target.value)}

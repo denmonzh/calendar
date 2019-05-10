@@ -10,7 +10,7 @@ module.exports = env => merge(config(env), {
   devtool: 'eval-source-map',
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'src/index.tpl.html',
+      template: 'src/index.html',
       inject: 'body',
       filename: 'index.html',
     }),

@@ -52,7 +52,3 @@ export const Description = styled.textarea`
      color: transparent;
   }
 `;
-
-export const Close = styled.img`
-  cursor: pointer;
-`;

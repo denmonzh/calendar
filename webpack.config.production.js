@@ -15,7 +15,7 @@ module.exports = env => merge(config(env), {
   plugins: [
     new HtmlWebpackPlugin({
       hash: true,
-      template: 'src/index.tpl.html',
+      template: 'src/index.html',
       inject: 'body',
       filename: 'index.html',
     }),

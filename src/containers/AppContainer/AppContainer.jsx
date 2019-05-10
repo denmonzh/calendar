@@ -15,8 +15,7 @@ import {
 } from 'redux-react-hook';
 import {
   GlobalStyle,
-  Spinner,
-  Center,
+  LoadingPage,
 } from 'web-styled';
 import {
   getCurrentDateMonth,
@@ -41,7 +40,7 @@ import {
   saveChangeNotice,
   selectedNoticedSearch,
 } from 'web-actions';
-import icon from 'web-assets/spinner.svg';
+
 
 setConfig({
   pureSFC: true,
@@ -110,10 +109,13 @@ const App = () => {
       {
           state.pending
             ? (
-              <Spinner
-                src={icon}
-              />
-            ) : (
+              <LoadingPage
+                size="50px"
+              >
+                  Loading...
+              </LoadingPage>
+            )
+            : (
               <Fragment>
                 <GlobalStyle />
                 <Header

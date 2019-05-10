@@ -2,21 +2,15 @@
 import React from 'react';
 import {
   Flex,
-} from 'web-styled';
-import backArrow from 'web-assets/back.svg';
-import nextArrow from 'web-assets/next.svg';
-import dateFns from 'date-fns';
-import {
   Text,
 } from 'web-styled';
+import dateFns from 'date-fns';
 import {
   ControllerItem,
-  Arrow,
 } from './styled';
 
 type Props = {
     current: object,
-    pending: boolean,
     handleNextMonth: {(): void},
     handlePrevMonth: {(): void},
 }
@@ -24,7 +18,6 @@ type Props = {
 
 const Controller = ({
   current,
-  pending,
   handleNextMonth,
   handlePrevMonth,
 }: Props) => {
@@ -38,11 +31,13 @@ const Controller = ({
       align="center"
     >
       <ControllerItem>
-        <Arrow
-          src={backArrow}
-          alt="Arrow"
+        <Text
+          size="50px"
+          cursor="pointer"
           onClick={() => handlePrevMonth()}
-        />
+        >
+              &#60;
+        </Text>
       </ControllerItem>
       <ControllerItem>
         <Text
@@ -54,11 +49,13 @@ const Controller = ({
         </Text>
       </ControllerItem>
       <ControllerItem>
-        <Arrow
-          src={nextArrow}
-          alt="Arrow"
+        <Text
+          size="50px"
+          cursor="pointer"
           onClick={() => handleNextMonth()}
-        />
+        >
+            &#62;
+        </Text>
       </ControllerItem>
     </Flex>
   );

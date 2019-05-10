@@ -229,3 +229,16 @@ export const Button = styled.button`
   }
   
 `;
+
+export const LoadingPage = styled.span`
+    left: 0;
+    font-size: 35px;
+    line-height: 200px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: -100px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 100%;
+`;

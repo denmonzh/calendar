@@ -10,8 +10,3 @@ export const ControllerItem = styled(Flex).attrs({
     width: 33%;
     margin: 20px 0 0 0;
 `;
-
-export const Arrow = styled.img`
-    width: 64px;
-    cursor: pointer;
-`;

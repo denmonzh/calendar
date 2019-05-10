@@ -3,7 +3,6 @@ import React, {
   useState,
   useEffect,
 } from 'react';
-import SearchIcon from 'web-assets/loupe_icon.svg';
 import {
   Flex,
   Text,
@@ -15,7 +14,6 @@ import {
 } from 'web-utils';
 import {
   HeaderContainer,
-  Icon,
   AddNotification,
   Result,
   ResultItem,
