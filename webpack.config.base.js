@@ -7,7 +7,7 @@ module.exports = env => ({
     ],
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
     publicPath: '/',
   },
@@ -152,7 +152,7 @@ module.exports = env => ({
       },
       // Common Image Formats
       {
-        test: /\.(?:ico|gif|png|jpg|jpeg|eot|webp|mp4)$/,
+        test: /\.(?:ico|gif|png|jpg|jpeg|eot|webp|mp4|svg)$/,
         use: [
           {
             loader: 'file-loader',
