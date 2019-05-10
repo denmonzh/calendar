@@ -6,20 +6,20 @@ const dateFormatCompare = 'D MMMM YYYY';
 
 export const randomIdGenerator = () => ((Math.random() * 1000000).toFixed(0));
 
-export const getNoticed = (note, id) => note.find(item => item.id === id);
+export const getNoticed = (note: Array, id: string) => note.find(item => item.id === id);
 
-export const convertToFormatDate = date => (dateFns.format(date, 'DD MMMM YYYY'));
+export const convertToFormatDate = (date: Date) => (dateFns.format(date, 'DD MMMM YYYY'));
 
-export const resultSearch = (result, item, value) => (
+export const resultSearch = (result: Array, item: Object, value: Array) => (
   value.forEach(val => (val.some(val.id === result.id) ? result : result.push(val)))
 );
 
 
-export const compareDate = (date1, date2) => (
+export const compareDate = (date1: Date, date2: Date) => (
   dateFns.format(date1, dateFormatCompare) === dateFns.format(date2, dateFormatCompare)
 );
 
-const noteItem = (day, noticed) => {
+const noteItem = (day: Date, noticed: Array) => {
   const note = [];
   if (noticed.length) {
     noticed.forEach(item => (
@@ -31,7 +31,7 @@ const noteItem = (day, noticed) => {
   return note;
 };
 
-export const monthDays = (month, selected, noticed) => {
+export const monthDays = (month: Date, selected: Date, noticed: Array) => {
   const monthStart = dateFns.startOfMonth(month);
   const monthEnd = dateFns.endOfMonth(monthStart);
   const startDate = dateFns.startOfWeek(monthStart);
@@ -63,7 +63,7 @@ export const monthDays = (month, selected, noticed) => {
 };
 
 
-export const weekDays = (month) => {
+export const weekDays = (month: Date) => {
   const dateFormat = 'dddd';
   const week = [];
 
@@ -79,7 +79,7 @@ export const weekDays = (month) => {
   return week;
 };
 
-export const searchNotice = (noticed, searchTerm) => {
+export const searchNotice = (noticed: Array, searchTerm: string) => {
   const result = [];
   const event = noticed.filter(item => item.event.indexOf(searchTerm) !== -1);
   const people = noticed.filter(item => item.participans.indexOf(searchTerm) !== -1);

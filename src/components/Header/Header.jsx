@@ -45,9 +45,7 @@ const Header = ({
   }, [searchTerm, noticed]);
 
   return (
-    <HeaderContainer
-      view={!result.length}
-    >
+    <HeaderContainer>
       <Flex
         width="50%"
         align="center"
@@ -107,6 +105,7 @@ const Header = ({
                             align="left"
                             margin="0 0 0 5px"
                             low="true"
+                            cursor="true"
                           >
                             {`Event: ${item.event}`}
                           </Text>
@@ -115,6 +114,7 @@ const Header = ({
                             align="left"
                             margin="0 0 0 5px"
                             low="true"
+                            cursor="true"
                           >
                             {`Person: ${item.participans}`}
                           </Text>
@@ -123,6 +123,7 @@ const Header = ({
                             align="left"
                             margin="0 0 0 5px"
                             low="true"
+                            cursor="true"
                           >
                             {`Description: ${item.description}`}
                           </Text>
@@ -131,6 +132,7 @@ const Header = ({
                             align="left"
                             margin="0 0 0 5px"
                             low="true"
+                            cursor="true"
                           >
                             {`Date: ${convertToFormatDate(item.date)}`}
                           </Text>

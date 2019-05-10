@@ -23,28 +23,28 @@ export const modalIsOpen = () => ({
   type: actionTypes.MODAL_IS_OPEN,
 });
 
-export const selectedDate = payload => ({
+export const selectedDate = (payload: Date) => ({
   type: actionTypes.SELECTED_DATE,
   payload,
 });
 
 
-export const addNoticed = payload => ({
+export const addNoticed = (payload: Object) => ({
   type: actionTypes.ADD_NOTICED,
   payload,
 });
 
-export const editNoticed = payload => ({
+export const editNoticed = (payload: Object) => ({
   type: actionTypes.EDIT_NOTICED,
   payload,
 });
 
-export const saveChangeNotice = payload => ({
+export const saveChangeNotice = (payload: Object) => ({
   type: actionTypes.SAVE_CHANGE_NOTICED,
   payload,
 });
 
-export const selectedNoticedSearch = payload => ({
+export const selectedNoticedSearch = (payload: Object) => ({
   type: actionTypes.SELECTED_SEARCH_NOTICE,
   payload,
 });

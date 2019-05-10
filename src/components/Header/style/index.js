@@ -10,7 +10,7 @@ export const HeaderContainer = styled(Flex).attrs({
 })`
    width: 100%;
    height: 60px;
-   margin-top: ${props => (props.view ? '10px' : '')}
+   margin-top: 15px;
 `;
 
 
@@ -55,11 +55,11 @@ export const Result = styled(Flex).attrs({
   justify: 'space-around',
 })`
   display: ${props => (props.view ? 'block' : 'none')}
-  position: absolute;
   margin: 10px 0 0 0;
   background-color: rgb(255,255,255);
   box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
   border-color: #b3ffe6;
+  position: absolute;
   border-style: ${props => (props.veiw ? 'none' : 'none solid solid solid')};
   border-width: 0 1px 1px 1px;
   border-bottom-left-radius: 5px;
@@ -76,6 +76,7 @@ export const ResultItem = styled(Flex).attrs({
 })`
   background: ${props => (props.complete ? '#00FF7F' : '#ff8080')};
   margin: 10px 0 0 0;
+  
   
   &:last-child{
     margin-bottom: 20px;

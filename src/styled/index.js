@@ -126,7 +126,7 @@ export const Text = styled.span`
     text-transform: ${props => (props.low ? '' : 'uppercase')};
     letter-spacing: ${props => (props.spacing ? props.spacing : '2px')};
     text-align: ${props => (props.align ? props.align : 'center')};
-    cursor: default;
+    cursor: ${props => (props.cursor ? 'pointer' : 'default')};
     width: 100%;
     margin: ${props => (props.margin ? props.margin : '0 auto')};
     padding: ${props => (props.padding ? props.padding : '')};
