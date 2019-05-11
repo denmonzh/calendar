@@ -21,6 +21,7 @@ import {
 import {
   Body,
   Description,
+  Exit,
 } from './styled';
 
 
@@ -84,13 +85,11 @@ const MainModal = ({
           >
                 Notation
           </Text>
-          <Text
-              size="40px"
-              cursor="pointer"
+          <Exit
               onClick={onRequestClose}
           >
               &#10006;
-          </Text>
+          </Exit>
         </Flex>
         <Input
           onChange={e => setEvent(e.target.value)}

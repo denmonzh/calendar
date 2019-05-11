@@ -52,3 +52,10 @@ export const Description = styled.textarea`
      color: transparent;
   }
 `;
+
+export const Exit = styled.span`
+  position: absolute;
+  right: 0;
+  font-size: 35px;
+  cursor: pointer;
+`;
